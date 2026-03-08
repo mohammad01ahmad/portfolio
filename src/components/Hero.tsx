@@ -1,19 +1,42 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { ArrowDown, VolumeX, Volume2 } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, scale, useMotionValueEvent, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 const Hero = () => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: videoRef,
-    offset: ["start start", "end start"]
-  });
 
-  const translateX = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const { scrollYProgress } = useScroll({ target: videoRef, offset: ["start end", "start start"] });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-115vh", "5vh"]);
+
+  // Track mouse movement
+  const mouseX = useMotionValue(0);
+  const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 800 });
+
+  useLayoutEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Calculate normalized value between -1 and 1 based on screen width
+      const xOffset = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseX.set(xOffset);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX]);
+
+  // Combine the scroll effect with the mouse movement.
+  // The mouse effect should be at 100% (-5vw to +5vw) at the top, and scale down to 0 as we scroll so the video centers perfectly.
+  const mouseMovementRange = useTransform(scrollYProgress, [0, 1], [10, 0]); // 10vw range at top, 0vw range at bottom
+
+  // Create a combined X value using a custom useTransform
+  const x = useTransform(
+    [smoothMouseX, mouseMovementRange],
+    ([latestMouseX, latestRange]) => `${(latestMouseX as number) * (latestRange as number)}vw`
+  );
 
   return (
     <>
@@ -103,31 +126,24 @@ const Hero = () => {
 
       {/* Desktop Video Section */}
       <section className="hidden md:block intro h-[100svh] px-8" ref={videoRef}>
-        <motion.div
-          className="video-preview relative w-full aspect-video overflow-hidden rounded-3xl will-change-transform cursor-pointer group"
+        <motion.div className="video-preview relative w-full aspect-video overflow-hidden rounded-3xl will-change-transform cursor-pointer group"
+          // Should be on top of the section initially and scales down to 100% when scrolling down
           style={{
-            translateX,
+            clipPath: "inset(0px)",
             scale,
-            clipPath: "inset(0px)"
-          }}
-        >
+            y,
+            x: x as any,
+          }}>
           <div className="video-wrapper absolute top-0 left-0 w-full h-full overflow-hidden rounded-2xl">
-            <video
-              src="public/coverr-developing-coding-sequences-3909-1080p.mp4"
-              muted={isMuted}
-              loop
-              autoPlay
-              playsInline
-              className="absolute top-0 left-0 w-full h-full rounded-2xl pointer-events-none"
-            />
+            <video src="/video/hero-video.mp4" muted={true} loop={true} className="absolute top-0 left-0 w-full h-full rounded-2xl pointer-events-none"></video>
           </div>
-          <button
-            onClick={() => setIsMuted(!isMuted)}
-            className="absolute bottom-8 right-8 z-10 scale-0 group-hover:scale-100 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-          >
+          <button className="absolute bottom-8 right-8 z-10 scale-0 group-hover:scale-100 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform" aria-label="Unmute video" role="button" style={{ opacity: 1, transform: "none" }}>
             <div className="bg-neutral-100/50 shadow-2xl backdrop-blur-2xl w-[4vw] h-[4vw] rounded-full flex items-center justify-center">
-              {isMuted ? <VolumeX className="w-[2vw] h-[2vw] text-neutral-900" /> : <Volume2 className="w-[2vw] h-[2vw] text-neutral-900" />}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-volume2 lucide-volume-2 w-[2vw] h-[2vw] text-neutral-900" aria-hidden="true">
+                <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
+                <path d="M16 9a5 5 0 0 1 0 6"></path>
+                <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+              </svg>
             </div>
           </button>
         </motion.div>

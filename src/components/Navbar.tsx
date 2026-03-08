@@ -4,7 +4,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <header>
+    <header className='sticky top-0'>
       <div className="overflow-hidden fixed left-4 lg:left-8 right-4 lg:right-8 top-4.5 lg:top-6 grid grid-cols-12 gap-4 lg:gap-8 z-50">
         <div className="hidden lg:block col-span-3">
           <span className="block overflow-hidden">

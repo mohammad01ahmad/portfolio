@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const FloatingNav = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,7 @@ const FloatingNav = () => {
 
     const navItems = [
         { name: 'Home', href: '/', icon: '/images/pages/home-icon.png' },
-        { name: 'Work', href: '/work', icon: '/images/pages/work-icon.png' },
+        { name: 'Work', href: '/work', icon: '/images/work.png' },
         { name: 'Lab', href: '/lab', icon: '/images/pages/lab-icon.png' }
     ];
 
@@ -33,11 +34,13 @@ const FloatingNav = () => {
                     >
                         <nav className="flex flex-col gap-4">
                             {navItems.map((item) => (
-                                <a key={item.name} className="flex items-center gap-5 group cursor-pointer" href={item.href}>
+                                <a key={item.name} className="flex items-center gap-5 group cursor-pointer " href={item.href}>
                                     <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-white rounded-lg md:rounded-xl overflow-hidden relative">
-                                        <img
+                                        <Image
+                                            fill={true}
+                                            objectFit="cover"
                                             alt={item.name}
-                                            className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
+                                            className="group-hover:scale-100 transition-transform duration-700"
                                             src={item.icon}
                                         />
                                     </div>
