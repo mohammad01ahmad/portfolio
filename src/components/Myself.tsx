@@ -72,7 +72,7 @@ const Myself = () => {
             <div className="hidden lg:block h-full col-span-5">
                 <div className="sticky top-[calc(100vh-20vw-172px)] w-full aspect-video rounded-lg lg:rounded-xl overflow-hidden">
                     <video
-                        src="/videos/about-video.mp4"
+                        src="/images/work.png"
                         autoPlay
                         muted
                         loop

@@ -1,30 +1,62 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const Navbar = () => {
+  // Text animation
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
   return (
-    <header className='sticky top-0'>
-      <div className="overflow-hidden fixed left-4 lg:left-8 right-4 lg:right-8 top-4.5 lg:top-6 grid grid-cols-12 gap-4 lg:gap-8 z-50">
+    <header className='fixed top-0 z-10'>
+      <div className="overflow-hidden fixed left-4 lg:left-8 right-4 lg:right-8 top-4.5 lg:top-6 grid grid-cols-12 gap-4 lg:gap-8 z-50" ref={ref}>
         <div className="hidden lg:block col-span-3">
           <span className="block overflow-hidden">
-            <div className="block font-medium text-[clamp(16px,1.2vw,20px)]">UAE Based</div>
+            <motion.div
+              className="block font-medium text-[clamp(16px,1.2vw,20px)]"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : { y: "100%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            >
+              UAE Based
+            </motion.div>
           </span>
           <span className="block overflow-hidden">
-            <div className="block font-medium text-neutral-400 text-[clamp(16px,1.2vw,20px)]">Working globally</div>
+            <motion.div
+              className="block font-medium text-neutral-400 text-[clamp(16px,1.2vw,20px)]"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : { y: "100%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            >
+              Working globally
+            </motion.div>
           </span>
         </div>
         <div className="col-span-3">
           <span className="block overflow-hidden">
-            <div className="block font-medium text-[clamp(16px,1.2vw,20px)]">Open to work</div>
+            <motion.div
+              className="block font-medium text-[clamp(16px,1.2vw,20px)]"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : { y: "100%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            >
+              Open to work
+            </motion.div>
           </span>
           <span className="block overflow-hidden">
             <div className="block font-medium text-[clamp(16px,1.2vw,20px)]">
               <a href="#projects" className="group">
                 <div className="overflow-hidden h-6">
                   <div className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-1/2">
-                    <span className="text-[clamp(16px,1.2vw,20px)] text-neutral-400 font-medium mb-1.5">View Projects</span>
-                    <span className="text-[clamp(16px,1.2vw,20px)] text-neutral-400 font-medium mb-1.5">View Projects</span>
+                    <motion.span
+                      className="text-[clamp(16px,1.2vw,20px)] text-neutral-400 font-medium mb-1.5"
+                      initial={{ y: "100%" }}
+                      animate={isInView ? { y: 0 } : { y: "100%" }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                    >
+                      View Projects
+                    </motion.span>
                   </div>
                 </div>
               </a>
@@ -33,10 +65,24 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block col-span-3">
           <span className="block overflow-hidden">
-            <div className="block font-medium text-[clamp(16px,1.2vw,20px)]">Availability</div>
+            <motion.div
+              className="block font-medium text-[clamp(16px,1.2vw,20px)]"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : { y: "100%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            >
+              Availability
+            </motion.div>
           </span>
           <span className="block overflow-hidden">
-            <div className="block font-medium text-neutral-400 text-[clamp(16px,1.2vw,20px)]">Immediate</div>
+            <motion.div
+              className="block font-medium text-neutral-400 text-[clamp(16px,1.2vw,20px)]"
+              initial={{ y: "100%" }}
+              animate={isInView ? { y: 0 } : { y: "100%" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            >
+              Immediate
+            </motion.div>
           </span>
         </div>
         <a href="mailto:mohammad01ahmad@gmail.com" className="fixed right-4 lg:right-8 top-4 lg:top-6 group cursor-pointer" aria-label="Send me an email" role="button">

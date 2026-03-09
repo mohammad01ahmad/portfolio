@@ -1,17 +1,24 @@
 'use client';
 
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { ArrowDown, VolumeX, Volume2 } from 'lucide-react';
-import { motion, scale, useMotionValueEvent, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 const Hero = () => {
+  // Video related
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef(null);
+
+  // Text animation
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const mobileRef = useRef(null)
+  const isMobileInView = useInView(mobileRef, { once: true })
 
   const { scrollYProgress } = useScroll({ target: videoRef, offset: ["start end", "start start"] });
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], ["-115vh", "5vh"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-115vh", "10vh"]);
 
   // Track mouse movement
   const mouseX = useMotionValue(0);
@@ -20,7 +27,7 @@ const Hero = () => {
   useLayoutEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       // Calculate normalized value between -1 and 1 based on screen width
-      const xOffset = (e.clientX / window.innerWidth - 0.5) * 2;
+      const xOffset = (e.clientX / window.innerWidth - 0.5) * 6;
       mouseX.set(xOffset);
     };
 
@@ -72,15 +79,29 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-0">
+          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-0" ref={mobileRef}>
             <div className="overflow-hidden">
               <div className="w-full pointer-events-none lg:pr-[4vw]">
-                <h1 className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase">SOFTWARE</h1>
+                <motion.h1
+                  className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase"
+                  initial={{ y: "100%" }}
+                  animate={isMobileInView ? { y: 0 } : { y: "100%" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  SOFTWARE
+                </motion.h1>
               </div>
             </div>
             <div className="overflow-hidden w-full">
               <div>
-                <h1 className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase w-full">ENGINEER</h1>
+                <motion.h1
+                  className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase w-full"
+                  initial={{ y: "100%" }}
+                  animate={isMobileInView ? { y: 0 } : { y: "100%" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                >
+                  ENGINEER
+                </motion.h1>
               </div>
             </div>
           </div>
@@ -92,20 +113,56 @@ const Hero = () => {
         <div className="flex flex-col uppercase font-semibold absolute bottom-[15vh] lg:bottom-[20vh] left-8 right-8">
           <div className="overflow-hidden mb-2 lg:mb-0 lg:w-full relative mx-auto lg:mx-0">
             <div className="flex justify-between w-full">
-              <p className="text-[clamp(14px,1.2vw,20px)] uppercase block">A</p>
-              <p className="text-[clamp(14px,1.2vw,20px)] uppercase absolute left-1/2 -translate-x-1/2">Seriously</p>
-              <p className="text-[clamp(14px,1.2vw,20px)] uppercase block">Good</p>
+              <motion.p
+                className="text-[clamp(14px,1.2vw,20px)] uppercase block"
+                initial={{ y: "-100%" }}
+                animate={isInView ? { y: 0 } : { y: "100%" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                A
+              </motion.p>
+
+              <motion.p
+                className="text-[clamp(14px,1.2vw,20px)] uppercase absolute left-1/2 -translate-x-1/2"
+                initial={{ y: "-100%" }}
+                animate={isInView ? { y: 0 } : { y: "100%" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Seriously
+              </motion.p>
+              <motion.p
+                className="text-[clamp(14px,1.2vw,20px)] uppercase block"
+                initial={{ y: "-100%" }}
+                animate={isInView ? { y: 0 } : { y: "100%" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                Good
+              </motion.p>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-3">
+          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-3" ref={ref}>
             <div className="">
-              <div className="w-full pointer-events-none lg:pr-[4vw]">
-                <h1 className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase">SOFTWARE</h1>
+              <div className="w-full pointer-events-none lg:pr-[4vw] overflow-hidden">
+                <motion.h1
+                  className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase"
+                  initial={{ y: "100%" }}
+                  animate={isInView ? { y: 0 } : { y: "100%" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  SOFTWARE
+                </motion.h1>
               </div>
             </div>
             <div className="w-full">
-              <div>
-                <h1 className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase w-full">ENGINEER</h1>
+              <div className='overflow-hidden'>
+                <motion.h1
+                  className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase w-full"
+                  initial={{ y: "100%" }}
+                  animate={isInView ? { y: 0 } : { y: "100%" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  ENGINEER
+                </motion.h1>
               </div>
             </div>
           </div>
@@ -133,19 +190,16 @@ const Hero = () => {
             scale,
             y,
             x: x as any,
-          }}>
+          }}
+        >
           <div className="video-wrapper absolute top-0 left-0 w-full h-full overflow-hidden rounded-2xl">
-            <video src="/video/hero-video.mp4" muted={true} loop={true} className="absolute top-0 left-0 w-full h-full rounded-2xl pointer-events-none"></video>
+            <video
+              src="/video/hero-video.mp4"
+              autoPlay
+              muted
+              loop
+              className="absolute top-0 left-0 w-full h-full rounded-2xl pointer-events-none" />
           </div>
-          <button className="absolute bottom-8 right-8 z-10 scale-0 group-hover:scale-100 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform" aria-label="Unmute video" role="button" style={{ opacity: 1, transform: "none" }}>
-            <div className="bg-neutral-100/50 shadow-2xl backdrop-blur-2xl w-[4vw] h-[4vw] rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-volume2 lucide-volume-2 w-[2vw] h-[2vw] text-neutral-900" aria-hidden="true">
-                <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
-                <path d="M16 9a5 5 0 0 1 0 6"></path>
-                <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
-              </svg>
-            </div>
-          </button>
         </motion.div>
       </section>
     </>
