@@ -112,8 +112,8 @@ const TechStack = () => {
                     <div className="grid grid-cols-3 border-b border-neutral-200 h-[300px]">
                         {[
                             { name: 'React', src: '/images/svg/react-logo.svg', href: 'https://reactjs.org', w: 90 },
-                            { name: 'Next.js', src: '/images/svg/nextjs.svg', href: 'https://nextjs.org', w: 150 },
-                            { name: 'TypeScript', src: '/images/svg/typescript.svg', href: 'https://typescriptlang.org', w: 70 }
+                            { name: 'Next.js', src: '/images/svg/nextjs-logotype-light-background.svg', href: 'https://nextjs.org', w: 150 },
+                            { name: 'TypeScript', src: '/images/svg/typescript-logo.svg', href: 'https://typescriptlang.org', w: 70 }
                         ].map((tech) => (
                             <a key={tech.name} href={tech.href} target="_blank" className="flex items-center justify-center border-r border-neutral-200 relative z-10 hover:invert transition-all duration-300">
                                 <Image alt={tech.name} width={tech.w} height={90} src={tech.src} className="object-contain" />
@@ -124,13 +124,13 @@ const TechStack = () => {
                     {/* Bottom Row */}
                     <div className="grid grid-cols-7 border-b border-neutral-200 h-[200px]">
                         {[
-                            { name: 'GSAP', src: '/images/svg/gsap.svg', w: 80 },
+                            { name: 'GSAP', src: '/images/svg/gsap-black.svg', w: 80 },
                             { name: 'Motion', src: '/images/svg/motion.svg', w: 60 },
-                            { name: 'Tailwind', src: '/images/svg/tailwind.svg', w: 70 },
-                            { name: 'Contentful', src: '/images/svg/contentful.svg', w: 50 },
-                            { name: 'Supabase', src: '/images/svg/supabase.svg', w: 50 },
-                            { name: 'Vercel', src: '/images/svg/vercel.svg', w: 90 },
-                            { name: 'Figma', src: '/images/svg/figma.svg', w: 50 }
+                            { name: 'Tailwind', src: '/images/svg/tailwindcss-logo.svg', w: 70 },
+                            { name: 'Contentful', src: '/images/svg/contentful-logo.svg', w: 50 },
+                            { name: 'Supabase', src: '/images/svg/supabase-logo.svg', w: 50 },
+                            { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', w: 90 },
+                            { name: 'Figma', src: '/images/svg/figma-logo.svg', w: 50 }
                         ].map((tech) => (
                             <a key={tech.name} href="#" className="flex items-center justify-center border-r last:border-r-0 border-neutral-200 relative z-10 hover:invert transition-all duration-300">
                                 <Image alt={tech.name} width={tech.w} height={80} src={tech.src} className="object-contain" />

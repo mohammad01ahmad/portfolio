@@ -85,21 +85,32 @@ const Navbar = () => {
             </motion.div>
           </span>
         </div>
-        <a href="mailto:mohammad01ahmad@gmail.com" className="fixed right-4 lg:right-8 top-4 lg:top-6 group cursor-pointer" aria-label="Send me an email" role="button">
-          <div className="relative">
-            <div className="absolute left-0 top-0 w-12 3xl:w-14 h-12 3xl:h-14 bg-neutral-900 border border-neutral-800 rounded-full flex items-center justify-center rotate-180 scale-95 group-hover:scale-100 group-hover:rotate-0 group-hover:-translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] -z-10">
-              <span className="text-lg lg:text-xl 3xl:text-2xl">🤙🏼</span>
-            </div>
-            <div className="flex items-center relative px-5 lg:px-6 h-12 lg:h-14 rounded-full bg-neutral-900 text-neutral-100 font-semibold text-[clamp(16px,1.2vw,20px)] border border-neutral-800 z-10">
-              <div className="overflow-hidden h-6 lg:h-7">
-                <div className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-1/2">
-                  <span className="text-[clamp(16px,1.2vw,20px)] text-neutral-100 font-semibold mb-1.5">Get in touch</span>
-                  <span className="text-[clamp(16px,1.2vw,20px)] text-neutral-100 font-semibold mb-1.5">Get in touch</span>
+        <motion.div
+          className='fixed right-4 lg:right-8 top-4 lg:top-6 z-50'
+          initial={{ y: "100%", opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        >
+          <a
+            href="mailto:mohammad01ahmad@gmail.com"
+            className="group cursor-pointer"
+            aria-label="Send me an email"
+            role="button"
+          >
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-12 3xl:w-14 h-12 3xl:h-14 bg-neutral-900 border border-neutral-800 rounded-full flex items-center justify-center rotate-180 scale-95 group-hover:scale-100 group-hover:rotate-0 group-hover:-translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] -z-10">
+                <span className="text-lg lg:text-xl 3xl:text-2xl">🤙🏼</span>
+              </div>
+              <div className="flex items-center relative px-5 lg:px-6 h-12 lg:h-14 rounded-full bg-neutral-900 text-neutral-100 font-semibold text-[clamp(16px,1.2vw,20px)] border border-neutral-800 z-10">
+                <div className="overflow-hidden h-6 lg:h-7">
+                  <div className="flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-1/2">
+                    <span className="text-[clamp(16px,1.2vw,20px)] text-neutral-100 font-semibold mb-1.5">Get in touch</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </motion.div>
       </div>
     </header>
   );

@@ -1,10 +1,12 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 
 const FloatingNav = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    const MotionImage = motion(Image);
 
     // Animation variants for the menu expansion
     const menuVariants = {
@@ -13,14 +15,19 @@ const FloatingNav = () => {
     };
 
     const navItems = [
-        { name: 'Home', href: '/', icon: '/images/pages/home-icon.png' },
+        { name: 'Home', href: '/', icon: '/images/home.png' },
         { name: 'Work', href: '/work', icon: '/images/work.png' },
-        { name: 'Lab', href: '/lab', icon: '/images/pages/lab-icon.png' }
+        { name: 'Projects', href: '/projects', icon: '/images/projects.png' }
     ];
 
-    return (
-        <div className="py-2 pl-2 pr-4 md:pr-8 rounded-2xl md:rounded-[20px] bg-neutral-900 border border-neutral-800 fixed left-4 md:left-1/2 right-4 md:right-auto md:-translate-x-1/2 bottom-4 md:bottom-6 md:w-[700px] z-50 overflow-hidden shadow-2xl">
+    // Text animation
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true })
 
+
+    // If floatingNav reaches on footer, it should animate down to the screen. 
+    return (
+        <div className="py-2 pl-2 pr-4 md:pr-8 rounded-2xl md:rounded-[20px] bg-neutral-900 border border-neutral-800 fixed left-4 md:left-1/2 right-4 md:right-auto md:-translate-x-1/2 bottom-4 md:bottom-6 md:w-[700px] z-50 overflow-hidden shadow-2xl" ref={ref}>
             {/* 1. Animated Expandable Menu */}
             <AnimatePresence>
                 {isOpen && (
@@ -36,20 +43,32 @@ const FloatingNav = () => {
                             {navItems.map((item) => (
                                 <a key={item.name} className="flex items-center gap-5 group cursor-pointer " href={item.href}>
                                     <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-white rounded-lg md:rounded-xl overflow-hidden relative">
-                                        <Image
+                                        <MotionImage
                                             fill={true}
                                             objectFit="cover"
                                             alt={item.name}
                                             className="group-hover:scale-100 transition-transform duration-700"
                                             src={item.icon}
-                                        />
+                                            priority={true}
+                                            initial={{ y: "100%" }}
+                                            animate={isInView ? { y: 0 } : { y: "100%" }}
+                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}>
+                                        </MotionImage>
                                     </div>
 
                                     {/* 2. Hover Slide Effect */}
                                     <div className="overflow-hidden h-8">
                                         <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-                                            <span className="text-lg md:text-xl font-semibold text-neutral-100 mb-1.5">{item.name}</span>
-                                            <span className="text-lg md:text-xl font-semibold text-neutral-100 mb-1.5">{item.name}</span>
+                                            <motion.span
+                                                initial={{ y: "100%" }}
+                                                animate={isInView ? { y: 0 } : { y: "100%" }}
+                                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                                                className="text-lg md:text-xl font-semibold text-neutral-100 mb-1.5">{item.name}</motion.span>
+                                            <motion.span
+                                                initial={{ y: "100%" }}
+                                                animate={isInView ? { y: 0 } : { y: "100%" }}
+                                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                                                className="text-lg md:text-xl font-semibold text-neutral-100 mb-1.5">{item.name}</motion.span>
                                         </div>
                                     </div>
                                 </a>

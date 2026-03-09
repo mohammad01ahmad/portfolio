@@ -111,7 +111,7 @@ const Hero = () => {
       {/* Desktop Layout */}
       <section className="hidden lg:block">
         <div className="flex flex-col uppercase font-semibold absolute bottom-[15vh] lg:bottom-[20vh] left-8 right-8">
-          <div className="overflow-hidden mb-2 lg:mb-0 lg:w-full relative mx-auto lg:mx-0">
+          <div className="overflow-hidden mb-2 lg:mb-0 lg:w-full lg:pt-15 relative mx-auto lg:mx-0">
             <div className="flex justify-between w-full">
               <motion.p
                 className="text-[clamp(14px,1.2vw,20px)] uppercase block"
@@ -168,16 +168,24 @@ const Hero = () => {
           </div>
         </div>
         <div className="overflow-hidden absolute left-8 bottom-6">
-          <div className="flex items-center gap-1">
+          <motion.div
+            className="flex items-center gap-1"
+            initial={{ y: "100%" }}
+            animate={isInView ? { y: 0 } : { y: "100%" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}>
             <ArrowDown className="w-[clamp(16px,1.3vw,24px)] h-[clamp(16px,1.3vw,24px)] text-neutral-900" />
             <p className="text-[clamp(12px,1.2vw,20px)] font-medium">Scroll for</p>
-          </div>
+          </motion.div>
         </div>
         <div className="overflow-hidden absolute right-8 bottom-6">
-          <div className="flex items-center gap-1">
+          <motion.div
+            className="flex items-center gap-1"
+            initial={{ y: "100%" }}
+            animate={isInView ? { y: 0 } : { y: "100%" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}>
             <p className="text-[clamp(12px,1.2vw,20px)] font-medium">cool sh*t</p>
             <ArrowDown className="w-[clamp(16px,1.3vw,24px)] h-[clamp(16px,1.3vw,24px)] text-neutral-900" />
-          </div>
+          </motion.div>
         </div>
       </section>
 
