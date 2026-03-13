@@ -31,12 +31,9 @@ const Myself = () => {
 
                 {/* Mobile Video */}
                 <div className="lg:hidden col-span-12 aspect-video rounded-lg overflow-hidden mb-4">
-                    <motion.video
-                        src="/videos/about-video.mp4"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                    <motion.img
+                        src="/images/work.png"
+                        alt="work"
                         className="pointer-events-none w-full h-full object-cover"
                         style={{ clipPath: videoClipPath }}
                     />

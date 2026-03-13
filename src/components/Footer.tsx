@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer className="bg-neutral-100" ref={footerRef}>
       <div className="px-2 lg:px-4 pt-8 lg:pt-16 pb-8 lg:pb-4 grid grid-cols-12 gap-2 lg:gap-4 relative">
-        <h2 className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 font-bold text-[clamp(100px,14vw,250px)] tracking-tight" style={{ transform: 'translateY(-10vh)' }}>
+        <h2 className="hidden lg:block absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 font-bold text-[clamp(100px,14vw,250px)] tracking-tight" style={{ transform: 'translateY(-10vh)' }}>
           Ahmad
         </h2>
 

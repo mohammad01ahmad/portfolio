@@ -27,12 +27,12 @@ const Projects = () => {
     "Python": "#4B8BBE",
   }
   return (
-    <section id="projects" className="px-2 lg:px-4 py-16 lg:py-24">
+    <section id="projects" className="px-4 lg:px-4 py-16 lg:py-24">
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center">
-            <h2 className="flex justify-between w-full">
-              <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase" aria-label="Work">
+            <h2 className="flex justify-between gap-2 w-full">
+              <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase whitespace-nowrap" aria-label="Work">
                 <div
                   className="line-mask line1-mask"
                   aria-hidden="true"
@@ -46,7 +46,7 @@ const Projects = () => {
                   </div>
                 </div>
               </span>
-              <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase" aria-label="'25">
+              <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase whitespace-nowrap" aria-label="'25">
                 <div
                   className="line-mask line1-mask"
                   aria-hidden="true"

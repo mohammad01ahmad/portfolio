@@ -84,6 +84,21 @@ const TechStack = () => {
 
     const modern = "MODERN".split("");
     const techstack = "TECHSTACK".split("");
+    const topRow = [
+        { name: 'React', src: '/images/svg/react-logo.svg', href: 'https://reactjs.org', w: 90 },
+        { name: 'Next.js', src: '/images/svg/nextjs-logotype-light-background.svg', href: 'https://nextjs.org', w: 150 },
+        { name: 'TypeScript', src: '/images/svg/typescript-logo.svg', href: 'https://typescriptlang.org', w: 70 }
+    ];
+    const bottomRow = [
+        { name: 'GSAP', src: '/images/svg/gsap-black.svg', w: 80 },
+        { name: 'Motion', src: '/images/svg/motion.svg', w: 60 },
+        { name: 'Tailwind', src: '/images/svg/tailwindcss-logo.svg', w: 70 },
+        { name: 'Contentful', src: '/images/svg/contentful-logo.svg', w: 50 },
+        { name: 'Supabase', src: '/images/svg/supabase-logo.svg', w: 50 },
+        { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', w: 90 },
+        { name: 'Figma', src: '/images/svg/figma-logo.svg', w: 50 }
+    ];
+    const mobileItems = [...topRow, ...bottomRow];
 
     return (
         <section className="pb-24 px-4 lg:px-8 bg-white" ref={scrollContainer}>
@@ -131,11 +146,7 @@ const TechStack = () => {
                 <div className="hidden lg:grid grid-rows-2 border-t border-neutral-200">
                     {/* Top Row */}
                     <div className="grid grid-cols-3 border-b border-neutral-200 h-[300px]">
-                        {[
-                            { name: 'React', src: '/images/svg/react-logo.svg', href: 'https://reactjs.org', w: 90 },
-                            { name: 'Next.js', src: '/images/svg/nextjs-logotype-light-background.svg', href: 'https://nextjs.org', w: 150 },
-                            { name: 'TypeScript', src: '/images/svg/typescript-logo.svg', href: 'https://typescriptlang.org', w: 70 }
-                        ].map((tech, idx) => (
+                        {topRow.map((tech, idx) => (
                             <a
                                 key={tech.name}
                                 href={tech.href}
@@ -151,15 +162,7 @@ const TechStack = () => {
 
                     {/* Bottom Row */}
                     <div className="grid grid-cols-7 border-b border-neutral-200 h-[200px]">
-                        {[
-                            { name: 'GSAP', src: '/images/svg/gsap-black.svg', w: 80 },
-                            { name: 'Motion', src: '/images/svg/motion.svg', w: 60 },
-                            { name: 'Tailwind', src: '/images/svg/tailwindcss-logo.svg', w: 70 },
-                            { name: 'Contentful', src: '/images/svg/contentful-logo.svg', w: 50 },
-                            { name: 'Supabase', src: '/images/svg/supabase-logo.svg', w: 50 },
-                            { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', w: 90 },
-                            { name: 'Figma', src: '/images/svg/figma-logo.svg', w: 50 }
-                        ].map((tech, idx) => (
+                        {bottomRow.map((tech, idx) => (
                             <a
                                 key={tech.name}
                                 href="#"
@@ -176,7 +179,16 @@ const TechStack = () => {
 
                 {/* Mobile Grid (Simplified) */}
                 <div className="grid grid-cols-2 lg:hidden border-t border-l border-neutral-200">
-                    {/* Map your items here for mobile as well... */}
+                    {mobileItems.map((tech) => (
+                        <a
+                            key={tech.name}
+                            href={tech.href || '#'}
+                            target="_blank"
+                            className="flex items-center justify-center border-b border-r even:border-r-0 border-neutral-200 h-24 sm:h-28 p-4"
+                        >
+                            <Image alt={tech.name} width={tech.w} height={80} src={tech.src} className="object-contain" />
+                        </a>
+                    ))}
                 </div>
             </div>
         </section>

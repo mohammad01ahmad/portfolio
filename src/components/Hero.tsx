@@ -58,9 +58,9 @@ const Hero = () => {
                 <p className="text-[clamp(14px,1.2vw,20px)] uppercase font-semibold">Good</p>
               </div>
             </div>
-            <div className="relative md:hidden">
+            <div className="relative lg:hidden">
               <video
-                src="/coverr-developing-coding-sequences-3909-1080p.mp4"
+                src="/video/hero-video.mp4"
                 muted={isMuted}
                 loop
                 autoPlay
@@ -79,11 +79,11 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-0" ref={mobileRef}>
+          <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-1 lg:gap-0" ref={mobileRef}>
             <div className="overflow-hidden">
               <div className="w-full pointer-events-none lg:pr-[4vw]">
                 <motion.h1
-                  className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase"
+                  className="text-[17vw] md:text-[16vw] lg:text-[17vw] font-extrabold lg:font-bold uppercase text-center leading-[0.85] lg:leading-[0.8]"
                   initial={{ y: "100%" }}
                   animate={isMobileInView ? { y: 0 } : { y: "100%" }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -95,7 +95,7 @@ const Hero = () => {
             <div className="overflow-hidden w-full">
               <div>
                 <motion.h1
-                  className="text-[15vw] md:text-[16vw] lg:text-[17vw] font-bold uppercase w-full"
+                  className="text-[19vw] md:text-[16vw] lg:text-[17vw] font-extrabold lg:font-bold uppercase w-full text-center leading-[0.85] lg:leading-[0.8]"
                   initial={{ y: "100%" }}
                   animate={isMobileInView ? { y: 0 } : { y: "100%" }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -208,7 +208,7 @@ const Hero = () => {
       </section>
 
       {/* Desktop Video Section */}
-      <section className="hidden md:block intro h-[100svh] px-8" ref={videoRef}>
+      <section className="hidden lg:block intro h-[100svh] px-8" ref={videoRef}>
         <motion.div className="video-preview relative w-full aspect-video overflow-hidden rounded-3xl will-change-transform cursor-pointer group"
           // Should be on top of the section initially and scales down to 100% when scrolling down
           style={{

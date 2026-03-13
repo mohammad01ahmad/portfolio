@@ -10,7 +10,10 @@ const Navbar = () => {
 
   return (
     <header className='fixed top-0 z-10'>
-      <div className="overflow-hidden fixed left-4 lg:left-8 right-4 lg:right-8 top-4.5 lg:top-6 grid grid-cols-12 gap-4 lg:gap-8 z-50" ref={ref}>
+      <div
+        className="overflow-hidden fixed left-4 lg:left-8 right-4 lg:right-8 top-4.5 lg:top-6 grid grid-cols-12 gap-4 lg:gap-8 z-50"
+        ref={ref}
+      >
         <div className="hidden lg:block col-span-3">
           <span className="block overflow-hidden">
             <motion.div
@@ -33,7 +36,8 @@ const Navbar = () => {
             </motion.div>
           </span>
         </div>
-        <div className="col-span-3">
+
+        <div className="col-span-12 lg:col-span-3">
           <span className="block overflow-hidden">
             <motion.div
               className="block font-medium text-[clamp(16px,1.2vw,20px)]"
