@@ -50,10 +50,10 @@ const Myself = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    Passionate about turning <span className="text-purple-600">data</span> into actionable insights, I build{' '}
-                    <span className="text-orange-500">intelligent systems</span> that solve real-world problems. With expertise in{' '}
-                    <span className="text-yellow-600">machine learning</span>, data engineering, and analytics, I help organizations{' '}
-                    unlock the power of their data to drive informed decisions and create meaningful impact.
+                    I'm a software engineer passionate about building reliable and scalable systems. My expertise lies{' '}
+                    in backend development, system architecture, and designing maintainable applications. I enjoy turning{' '}
+                    complex ideas into practical solutions and delivering software, that is efficient, secure,{' '}
+                    and built to perform in real-world environments.
                 </motion.p>
 
                 {/* Mobile Text */}

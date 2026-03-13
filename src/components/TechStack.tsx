@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -27,9 +27,28 @@ const ScrollingLetter = ({ char, progress, range }: { char: string, progress: an
 const TechStack = () => {
     const scrollContainer = useRef(null);
     const gridRef = useRef<HTMLDivElement>(null);
+    const firstItemRef = useRef<HTMLAnchorElement>(null);
 
     // State for the magnetic highlight box
-    const [highlight, setHighlight] = useState({ opacity: 0, left: 0, top: 0, width: 0, height: 0 });
+    const [highlight, setHighlight] = useState({ opacity: 1, left: 0, top: 0, width: 0, height: 0 });
+    const [hasInteracted, setHasInteracted] = useState(false);
+    const [lastHoveredIndex, setLastHoveredIndex] = useState<string>('React'); // Initialize with first item
+
+    // Initialize highlight on first item
+    useEffect(() => {
+        if (firstItemRef.current && gridRef.current && !hasInteracted) {
+            const rect = firstItemRef.current.getBoundingClientRect();
+            const gridRect = gridRef.current.getBoundingClientRect();
+
+            setHighlight({
+                opacity: 1,
+                left: rect.left - gridRect.left,
+                top: rect.top - gridRect.top,
+                width: rect.width,
+                height: rect.height,
+            });
+        }
+    }, [hasInteracted]);
 
     // Scroll progress for the "MODERN TECH STACK" text
     const { scrollYProgress } = useScroll({
@@ -41,10 +60,15 @@ const TechStack = () => {
         const grid = gridRef.current;
         if (!grid) return;
 
+        setHasInteracted(true);
+
         const target = e.target as HTMLElement;
-        const link = target.closest('a'); // Find the parent anchor tag
+        const link = target.closest('a');
 
         if (link) {
+            const techName = link.getAttribute('data-tech');
+            if (techName) setLastHoveredIndex(techName);
+
             const rect = link.getBoundingClientRect();
             const gridRect = grid.getBoundingClientRect();
 
@@ -55,8 +79,6 @@ const TechStack = () => {
                 width: rect.width,
                 height: rect.height,
             });
-        } else {
-            setHighlight(prev => ({ ...prev, opacity: 0 }));
         }
     };
 
@@ -92,8 +114,7 @@ const TechStack = () => {
             <h4 className="font-semibold uppercase mb-8 text-neutral-500 text-sm tracking-widest">Professional at</h4>
 
             {/* 2. Magnetic Grid Section */}
-            <div className="relative group/grid" ref={gridRef} onMouseMove={handleMouseMove} onMouseLeave={() => setHighlight(prev => ({ ...prev, opacity: 0 }))}>
-
+            <div className="relative group/grid" ref={gridRef} onMouseMove={handleMouseMove}>
                 {/* The Floating Highlight Box */}
                 <motion.div
                     className="absolute bg-neutral-900 pointer-events-none z-0 hidden lg:block"
@@ -104,7 +125,7 @@ const TechStack = () => {
                         height: highlight.height,
                         opacity: highlight.opacity
                     }}
-                    transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
 
                 <div className="hidden lg:grid grid-rows-2 border-t border-neutral-200">
@@ -114,8 +135,15 @@ const TechStack = () => {
                             { name: 'React', src: '/images/svg/react-logo.svg', href: 'https://reactjs.org', w: 90 },
                             { name: 'Next.js', src: '/images/svg/nextjs-logotype-light-background.svg', href: 'https://nextjs.org', w: 150 },
                             { name: 'TypeScript', src: '/images/svg/typescript-logo.svg', href: 'https://typescriptlang.org', w: 70 }
-                        ].map((tech) => (
-                            <a key={tech.name} href={tech.href} target="_blank" className="flex items-center justify-center border-r border-neutral-200 relative z-10 hover:invert transition-all duration-300">
+                        ].map((tech, idx) => (
+                            <a
+                                key={tech.name}
+                                href={tech.href}
+                                target="_blank"
+                                className={`flex items-center justify-center border-r border-neutral-200 relative z-10 transition-all duration-300 ${lastHoveredIndex === tech.name ? 'invert' : ''}`}
+                                data-tech={tech.name}
+                                ref={idx === 0 ? firstItemRef : null}
+                            >
                                 <Image alt={tech.name} width={tech.w} height={90} src={tech.src} className="object-contain" />
                             </a>
                         ))}
@@ -131,8 +159,15 @@ const TechStack = () => {
                             { name: 'Supabase', src: '/images/svg/supabase-logo.svg', w: 50 },
                             { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', w: 90 },
                             { name: 'Figma', src: '/images/svg/figma-logo.svg', w: 50 }
-                        ].map((tech) => (
-                            <a key={tech.name} href="#" className="flex items-center justify-center border-r last:border-r-0 border-neutral-200 relative z-10 hover:invert transition-all duration-300">
+                        ].map((tech, idx) => (
+                            <a
+                                key={tech.name}
+                                href="#"
+                                target="_blank"
+                                className={`flex items-center justify-center border-r last:border-r-0 border-neutral-200 relative z-10 transition-all duration-300 ${lastHoveredIndex === tech.name ? 'invert' : ''}`}
+                                data-tech={tech.name}
+                                ref={idx === 0 ? firstItemRef : null}
+                            >
                                 <Image alt={tech.name} width={tech.w} height={80} src={tech.src} className="object-contain" />
                             </a>
                         ))}

@@ -44,7 +44,7 @@ export default function ProjectsPage() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {/* Map all projects from data */}
                         {data.map((project, index) => (
-                            <div className="rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-primary/50 animate-fade-in-up h-full flex flex-col" style={{ animationDelay: `${index * 100}ms` }}>
+                            <div key={project.id || index} className="rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-primary/50 animate-fade-in-up h-full flex flex-col" style={{ animationDelay: `${index * 100}ms` }}>
                                 <div className="flex flex-col space-y-1.5 p-6 pb-3 flex-shrink-0">
                                     <div className="flex items-start justify-between gap-2">
                                         <h3 className="font-semibold tracking-tight text-lg group-hover:text-primary transition-colors line-clamp-2 leading-tight">{project.name}</h3>

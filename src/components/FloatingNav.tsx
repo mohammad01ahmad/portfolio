@@ -1,18 +1,39 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 
 const FloatingNav = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isFooterInView, setIsFooterInView] = useState(false);
 
     const MotionImage = motion(Image);
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
 
-    // Animation variants for the menu expansion
-    const menuVariants = {
-        closed: { height: 0, opacity: 0, marginBottom: 0 },
-        open: { height: "auto", opacity: 1, marginBottom: 16 }
-    };
+    // Track footer visibility
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsFooterInView(entry.isIntersecting);
+            },
+            {
+                threshold: 0.1, // Trigger when 10% of footer is visible
+                rootMargin: '-100px 0px 0px 0px' // Offset from top
+            }
+        );
+
+        const footerElement = document.querySelector('footer');
+        if (footerElement) {
+            observer.observe(footerElement);
+        }
+
+        return () => {
+            if (footerElement) {
+                observer.unobserve(footerElement);
+            }
+        };
+    }, []);
 
     const navItems = [
         { name: 'Home', href: '/', icon: '/images/home.png' },
@@ -20,15 +41,24 @@ const FloatingNav = () => {
         { name: 'Projects', href: '/projects', icon: '/images/projects.png' }
     ];
 
-    // Text animation
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true })
+    const menuVariants = {
+        closed: { height: 0, opacity: 0, marginBottom: 0 },
+        open: { height: "auto", opacity: 1, marginBottom: 16 }
+    };
 
-
-    // If floatingNav reaches on footer, it should animate down to the screen. 
     return (
-        <div className="py-2 pl-2 pr-4 md:pr-8 rounded-2xl md:rounded-[20px] bg-neutral-900 border border-neutral-800 fixed left-4 md:left-1/2 right-4 md:right-auto md:-translate-x-1/2 bottom-4 md:bottom-6 md:w-[700px] z-50 overflow-hidden shadow-2xl" ref={ref}>
-            {/* 1. Animated Expandable Menu */}
+        <motion.div
+            className="py-2 pl-2 pr-4 md:pr-8 rounded-2xl md:rounded-[20px] bg-neutral-900 border border-neutral-800 fixed left-4 md:left-1/4 right-4 md:right-auto md:-translate-x-1/2 bottom-4 md:bottom-6 md:w-[700px] z-50 overflow-hidden shadow-2xl"
+            ref={ref}
+            animate={{
+                translateY: isFooterInView ? 200 : 0
+            }}
+            transition={{
+                duration: 0.6,
+                ease: [0.25, 1, 0.5, 1]
+            }}
+        >
+            {/* Rest of your FloatingNav code remains exactly the same */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -56,7 +86,6 @@ const FloatingNav = () => {
                                         </MotionImage>
                                     </div>
 
-                                    {/* 2. Hover Slide Effect */}
                                     <div className="overflow-hidden h-8">
                                         <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
                                             <motion.span
@@ -81,7 +110,6 @@ const FloatingNav = () => {
                 )}
             </AnimatePresence>
 
-            {/* Bottom Bar (Always Visible) */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 md:gap-5">
                     <div className="h-[60px] w-[60px] md:h-[80px] md:w-[80px] rounded-lg md:rounded-xl bg-neutral-100 overflow-hidden relative">
@@ -91,7 +119,6 @@ const FloatingNav = () => {
                     <div className="flex flex-col gap-1.5 md:gap-2 w-[180px] sm:w-[400px] relative">
                         <a className="md:text-lg font-semibold text-neutral-100 uppercase" href="/">Muhammad Ahmad</a>
 
-                        {/* 3. Marquee Animation */}
                         <div className="flex items-center h-4 overflow-hidden relative w-full">
                             <div className="absolute left-0 h-full w-8 bg-gradient-to-r from-neutral-900 to-transparent z-10" />
                             <div className="absolute right-0 h-full w-8 bg-gradient-to-l from-neutral-900 to-transparent z-10" />
@@ -112,7 +139,6 @@ const FloatingNav = () => {
                     </div>
                 </div>
 
-                {/* Toggle Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
@@ -126,7 +152,7 @@ const FloatingNav = () => {
                     </motion.div>
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

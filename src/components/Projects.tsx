@@ -30,7 +30,6 @@ const Projects = () => {
     <section id="projects" className="px-2 lg:px-4 py-16 lg:py-24">
       <div className="max-w-6xl mx-auto space-y-12">
         <div className="max-w-6xl mx-auto space-y-12">
-
           <div className="text-center">
             <h2 className="flex justify-between w-full">
               <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase" aria-label="Work">
@@ -68,7 +67,7 @@ const Projects = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Map all projects from data */}
             {data.map((project, index) => (
-              <div className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-primary/50 animate-fade-in-up h-full flex flex-col" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={project.id || index} className="bg-white rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-lg transition-all duration-300 cursor-pointer hover:border-primary/50 animate-fade-in-up h-full flex flex-col" style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="flex flex-col space-y-1.5 p-6 pb-3 flex-shrink-0">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold tracking-tight text-lg group-hover:text-primary transition-colors line-clamp-2 leading-tight">{project.name}</h3>
@@ -121,20 +120,24 @@ const Projects = () => {
               </div>
             )
             )}
-            <div className="text-center animate-fade-in-up">
-              <a href="/projects" className="bg-white inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8 group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-code mr-2 h-4 w-4">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-                View All Projects
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform">
-                  <path d="M15 3h6v6"></path>
-                  <path d="M10 14 21 3"></path>
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                </svg>
-              </a>
-            </div>
+          </div>
+        </div>
+
+        {/* View All Projects Button*/}
+        <div className="flex justify-center items-center">
+          <div className="text-center animate-fade-in-up">
+            <a href="/projects" className="bg-white inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8 group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-code mr-2 h-4 w-4">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              View All Projects
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform">
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

@@ -141,30 +141,48 @@ const Hero = () => {
             </div>
           </div>
           <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-2 lg:gap-3" ref={ref}>
-            <div className="">
-              <div className="w-full pointer-events-none lg:pr-[4vw] overflow-hidden">
-                <motion.h1
-                  className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase"
-                  initial={{ y: "100%" }}
-                  animate={isInView ? { y: 0 } : { y: "100%" }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  SOFTWARE
-                </motion.h1>
+            <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase" aria-label="Work">
+              <div
+                className="line-mask line1-mask"
+                aria-hidden="true"
+                style={{ position: 'relative', display: 'block', textAlign: 'start', overflow: 'clip' }}
+              >
+                <div
+                  className="line line1"
+                  aria-hidden="true"
+                  style={{ position: 'relative', display: 'block', textAlign: 'start', translate: 'none', rotate: 'none', scale: 'none', transform: 'translate(0px, 0px)' }}>
+                  <motion.h1
+                    className="text-[15vw] md:text-[16vw] lg:text-[9.5vw] font-bold uppercase"
+                    initial={{ y: "100%" }}
+                    animate={isInView ? { y: 0 } : { y: "100%" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    SOFTWARE
+                  </motion.h1>
+                </div>
               </div>
-            </div>
-            <div className="w-full">
-              <div className='overflow-hidden'>
-                <motion.h1
-                  className="text-[15vw] md:text-[16vw] lg:text-[9vw] font-bold uppercase w-full"
-                  initial={{ y: "100%" }}
-                  animate={isInView ? { y: 0 } : { y: "100%" }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  ENGINEER
-                </motion.h1>
+            </span>
+            <span className="text-[clamp(48px,12vw,200px)] font-bold tracking-tight leading-[0.8] uppercase" aria-label="Work">
+              <div
+                className="line-mask line1-mask"
+                aria-hidden="true"
+                style={{ position: 'relative', display: 'block', textAlign: 'start', overflow: 'clip' }}
+              >
+                <div
+                  className="line line1"
+                  aria-hidden="true"
+                  style={{ position: 'relative', display: 'block', textAlign: 'start', translate: 'none', rotate: 'none', scale: 'none', transform: 'translate(0px, 0px)' }}>
+                  <motion.h1
+                    className="text-[15vw] md:text-[16vw] lg:text-[9.5vw] font-bold uppercase"
+                    initial={{ y: "100%" }}
+                    animate={isInView ? { y: 0 } : { y: "100%" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    ENGINEER
+                  </motion.h1>
+                </div>
               </div>
-            </div>
+            </span>
           </div>
         </div>
         <div className="overflow-hidden absolute left-8 bottom-6">
