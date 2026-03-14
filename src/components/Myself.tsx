@@ -29,10 +29,10 @@ const Myself = () => {
                     Myself
                 </motion.h4>
 
-                {/* Mobile Video */}
+                {/* Mobile Image */}
                 <div className="lg:hidden col-span-12 aspect-video rounded-lg overflow-hidden mb-4">
                     <motion.img
-                        src="/images/work.png"
+                        src="/images/coding-workspace.png"
                         alt="work"
                         className="pointer-events-none w-full h-full object-cover"
                         style={{ clipPath: videoClipPath }}
@@ -69,7 +69,7 @@ const Myself = () => {
             <div className="hidden lg:block h-full col-span-5">
                 <div className="sticky top-[calc(100vh-20vw-172px)] w-full aspect-video rounded-lg lg:rounded-xl overflow-hidden">
                     <img
-                        src="/images/work.png"
+                        src="/images/coding-workspace.png"
                         className="pointer-events-none w-full h-full object-cover"
                     />
                 </div>

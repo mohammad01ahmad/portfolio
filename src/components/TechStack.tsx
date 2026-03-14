@@ -90,13 +90,13 @@ const TechStack = () => {
         { name: 'TypeScript', src: '/images/svg/typescript-logo.svg', href: 'https://typescriptlang.org', w: 70 }
     ];
     const bottomRow = [
-        { name: 'GSAP', src: '/images/svg/gsap-black.svg', w: 80 },
-        { name: 'Motion', src: '/images/svg/motion.svg', w: 60 },
-        { name: 'Tailwind', src: '/images/svg/tailwindcss-logo.svg', w: 70 },
-        { name: 'Contentful', src: '/images/svg/contentful-logo.svg', w: 50 },
-        { name: 'Supabase', src: '/images/svg/supabase-logo.svg', w: 50 },
-        { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', w: 90 },
-        { name: 'Figma', src: '/images/svg/figma-logo.svg', w: 50 }
+        { name: 'GSAP', src: '/images/svg/gsap-black.svg', href: 'https://greensock.com', w: 80 },
+        { name: 'Motion', src: '/images/svg/motion.svg', href: 'https://motion.dev', w: 60 },
+        { name: 'Tailwind', src: '/images/svg/tailwindcss-logo.svg', href: 'https://tailwindcss.com', w: 70 },
+        { name: 'Contentful', src: '/images/svg/contentful-logo.svg', href: 'https://contentful.com', w: 50 },
+        { name: 'Supabase', src: '/images/svg/supabase-logo.svg', href: 'https://supabase.com', w: 50 },
+        { name: 'Vercel', src: '/images/svg/vercel-logotype-light.svg', href: 'https://vercel.com', w: 90 },
+        { name: 'Figma', src: '/images/svg/figma-logo.svg', href: 'https://figma.com', w: 50 }
     ];
     const mobileItems = [...topRow, ...bottomRow];
 
@@ -165,7 +165,7 @@ const TechStack = () => {
                         {bottomRow.map((tech, idx) => (
                             <a
                                 key={tech.name}
-                                href="#"
+                                href={tech.href || "#"}
                                 target="_blank"
                                 className={`flex items-center justify-center border-r last:border-r-0 border-neutral-200 relative z-10 transition-all duration-300 ${lastHoveredIndex === tech.name ? 'invert' : ''}`}
                                 data-tech={tech.name}
