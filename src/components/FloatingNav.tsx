@@ -72,18 +72,22 @@ const FloatingNav = () => {
                         <nav className="flex flex-col gap-4">
                             {navItems.map((item) => (
                                 <a key={item.name} className="flex items-center gap-5 group cursor-pointer " href={item.href}>
-                                    <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-white rounded-lg md:rounded-xl overflow-hidden relative">
-                                        <MotionImage
-                                            fill={true}
-                                            objectFit="cover"
-                                            alt={item.name}
-                                            className="group-hover:scale-100 transition-transform duration-700"
-                                            src={item.icon}
-                                            priority={true}
+                                    <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-neutral-900 rounded-lg md:rounded-xl overflow-hidden relative group">
+                                        <motion.div
+                                            className="w-full h-full"
                                             initial={{ y: "100%" }}
                                             animate={isInView ? { y: 0 } : { y: "100%" }}
-                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}>
-                                        </MotionImage>
+                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                                        >
+                                            <Image
+                                                src={item.icon}
+                                                alt={item.name}
+                                                fill
+                                                priority // Forces early loading for performance
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 60px, 80px"
+                                            />
+                                        </motion.div>
                                     </div>
 
                                     <div className="overflow-hidden h-8">

@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 const Myself = () => {
     const sectionRef = useRef(null);
@@ -30,14 +31,19 @@ const Myself = () => {
                 </motion.h4>
 
                 {/* Mobile Image */}
-                <div className="lg:hidden col-span-12 aspect-video rounded-lg overflow-hidden mb-4">
-                    <motion.img
+                <motion.div
+                    className="lg:hidden col-span-12 aspect-video rounded-lg overflow-hidden mb-4 relative"
+                    style={{ clipPath: videoClipPath }} // Apply animation to the container
+                >
+                    <Image
                         src="/images/coding-workspace.png"
                         alt="work"
-                        className="pointer-events-none w-full h-full object-cover"
-                        style={{ clipPath: videoClipPath }}
+                        fill // Replaces w-full h-full
+                        priority // Loads it early (LCP optimization)
+                        className="pointer-events-none object-cover"
+                        sizes="(max-width: 1024px) 100vw" // Helps browser pick right size
                     />
-                </div>
+                </motion.div>
 
                 {/* Desktop Text with Animation */}
                 <motion.p
@@ -61,7 +67,10 @@ const Myself = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    Passionate about turning data into actionable insights, I build intelligent systems that solve real-world problems. With expertise in machine learning, data engineering, and analytics, I help organizations unlock the power of their data to drive informed decisions and create meaningful impact.
+                    I'm a software engineer passionate about building reliable and scalable systems. My expertise lies{' '}
+                    in backend development, system architecture, and designing maintainable applications. I enjoy turning{' '}
+                    complex ideas into practical solutions and delivering software, that is efficient, secure,{' '}
+                    and built to perform in real-world environments.
                 </motion.p>
             </div>
 
